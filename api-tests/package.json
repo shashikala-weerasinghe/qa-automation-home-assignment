@@ -1,0 +1,12 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "description": "Jest API automation tests for Trello-like board application",
+  "scripts": {
+    "test": "jest --verbose --runInBand"
+  },
+  "devDependencies": {
+    "axios": "^1.6.7",
+    "jest": "^29.7.0"
+  }
+}

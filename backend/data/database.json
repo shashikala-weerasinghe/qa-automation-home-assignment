@@ -1,14 +1,22 @@
 {
   "boards": [
     {
-      "name": "b2",
+      "name": "Test Board",
       "user": 0,
       "starred": false,
-      "created": "2024-06-05",
+      "created": "2026-04-09",
       "id": 1
     }
   ],
   "cards": [],
-  "lists": [],
+  "lists": [
+    {
+      "boardId": 1,
+      "name": "Keep This",
+      "order": 0,
+      "created": "2026-04-09",
+      "id": 1
+    }
+  ],
   "users": []
 }

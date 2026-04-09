@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "vite",
-    "lint": "prettier --write \"src/**/*.{ts,vue,js}\" && eslint \"**/*.{ts,vue,js}\" --fix && echo \"✅ All files passed linting!\"",
+    "lint": "prettier --write \"src/**/*.{ts,vue,`j`s}\" && eslint \"**/*.{ts,vue,js}\" --fix && echo \"✅ All files passed linting!\"",
     "typecheck": "tsc --noEmit -p . && vue-tsc --noEmit && echo \"✅ All file types passed!\"",
     "selectorcheck": "./scripts/getSelectors.sh",
     "postinstall": "echo \"App was installed sucessfully ✅\nYou can now run it by typing:\nnpm start\""
