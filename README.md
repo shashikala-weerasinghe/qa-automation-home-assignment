@@ -1,40 +1,135 @@
-## Transmedia QA Recruitment Technical Test
+# 🚀 Transmedia QA Recruitment – Technical Test
 
-**Notes:**
+This repository contains the solution for the **Transmedia QA Recruitment Technical Assessment**, covering both **UI Automation** and **API Automation**.
 
-- You are free to use any popular UI test framework/tool(i.e. Selenium,Cypress)
-- You are free to use any popular API test framework/tool(i.e. Postman,Jest)
-- After complete, please upload the code in a Github repository(Please keep the repository public) and submit this [Google Form](https://forms.gle/bZEhAzZTxKpqNGPZ8)
+---
 
-## Pre-requisite
+## 📌 Tech Stack
 
-Install the app, simply clone this project and
+### UI Automation
 
-1. `npm install`
-2. `npm start`
+- Selenium WebDriver (Java)
+- TestNG
+- Maven
 
-## Tasks
+### API Automation
 
-**UI Automation**
+- Postman / Jest
 
-```
-1. Input a Board name, press enter. Verify Board created successfully.
-2. Add two lists and verify two lists created successfully.
-3. Delete a list.
-```
+### Other Tools
 
+- Node.js
+- GitHub
+
+---
+
+## 📂 Project Structure
+
+project-root/
+│── ui-tests/ # UI automation test cases
+│── api-tests/ # API automation test cases
+│── pages/ # Page Object Model (POM)
+│── utils/ # Utility classes
+│── test-data/ # Test data
+│── screenshots/ # Test result images
+│── pom.xml
+│── README.md
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the Application
+
+```bash
+git clone https://github.com/shashikala-weerasinghe/qa-automation-home-assignment
+
+2️⃣ Install Dependencies
+npm install
+3️⃣ Run the Application
+npm start
+
+Application will run on:
+
+http://localhost:3000
+
+🧪 Test Scenarios
+
+✅ UI Automation
+
+Create a Board
+Enter board name
+Press Enter
+Verify board created
+Add Lists
+Add two lists
+Verify both lists created
+Delete List
+Delete one list
+Verify deletion
+
+🌐 API Automation
+
+Create a List (POST)
+Delete the Created List (DELETE)
+
+▶️ Running Tests
+
+UI Tests
+mvn clean test
+API Tests
+Postman
+Import collection from /api-tests
+Run using Collection Runner
+Jest
+npm test
+
+📸 Test Results
+UI Automation Results
 ![alt text](image.png)
 
-**API Automation**
 
-```
-1. Add a new list
-2. Delete the newly created list
-```
+
+API Automation Results
 ![alt text](image-1.png)
 
-**Evaluation Criteria:**
 
-- Project Structure(30%)
-- Best practises and clean code(40%)
-- Workable code(30%)
+
+✔ All test cases executed successfully
+
+🧱 Design Pattern
+
+Page Object Model (POM)
+Reusable components
+Clean separation of UI & API tests
+
+✅ Best Practices
+Clean and maintainable code
+Reusable methods
+Explicit waits (no hard waits)
+Proper assertions
+Organized folder structure
+
+⚠️ Assumptions
+Application runs on http://localhost:3000
+API endpoints are accessible
+
+
+👨‍💻 Author
+
+Shashikala Weerasinghe
+
+⭐ Quick Start
+# Start app
+npm install
+npm start
+
+# Run UI tests
+mvn clean test
+
+# Run API tests
+npm test
+
+---
+
+```
