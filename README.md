@@ -40,15 +40,15 @@ Shashikala Weerasinghe
 
 ⭐ Quick Start
 
-# Start app
+### Start app
 
 npm install
 npm start
 
-# Run UI tests
+### Run UI tests
 
 mvn clean test
 
-# Run API tests
+### Run API tests
 
 npm test
