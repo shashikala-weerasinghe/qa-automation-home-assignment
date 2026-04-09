@@ -38,11 +38,15 @@ public final class ConfigReader {
     }
 
     public static int getImplicitWait() {
-        return Integer.parseInt(properties.getProperty("implicit.wait", "10"));
+        return Integer.parseInt(
+                System.getProperty("implicit.wait",
+                        properties.getProperty("implicit.wait", "10")));
     }
 
     public static int getExplicitWait() {
-        return Integer.parseInt(properties.getProperty("explicit.wait", "15"));
+        return Integer.parseInt(
+                System.getProperty("explicit.wait",
+                        properties.getProperty("explicit.wait", "15")));
     }
 
     public static boolean isHeadless() {

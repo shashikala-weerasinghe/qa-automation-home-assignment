@@ -36,6 +36,10 @@ public class BoardTest extends BaseTest {
 
         Assert.assertEquals(actualTitle, boardName,
                 "Board title on the detail page should match the entered name");
+
+        // Verify URL changed to board detail page
+        Assert.assertTrue(driver.getCurrentUrl().contains("/board/"),
+                "URL should contain '/board/' after board creation");
     }
 
     @Test(priority = 2, description = "Add two lists to a board and verify both are created successfully")

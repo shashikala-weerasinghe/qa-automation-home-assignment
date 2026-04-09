@@ -28,9 +28,11 @@ public class BoardDetailPage extends BasePage {
 
     /**
      * Creates a new list by clicking "Add a list", typing the name,
-     * and pressing Enter.
+     * and pressing Enter. Waits for the expected list count to confirm creation.
      */
     public void createList(String listName) {
+        int currentCount = getLists().size();
+
         waitForClickable(byCy("create-list")).click();
 
         WebElement input = waitForVisible(byCy("add-list-input"));
@@ -38,8 +40,8 @@ public class BoardDetailPage extends BasePage {
         input.sendKeys(listName);
         input.sendKeys(Keys.ENTER);
 
-        // Wait until the newly created list is rendered
-        waitForVisible(byCy("list"));
+        // Wait until the new list appears in the DOM (count increases by 1)
+        waitForNumberOfElements(byCy("list"), currentCount + 1);
     }
 
     /** Returns all list elements currently displayed on the board. */
@@ -64,8 +66,10 @@ public class BoardDetailPage extends BasePage {
      * 1. Clicking the list options button (three dots)
      * 2. Waiting for the dropdown to appear
      * 3. Clicking "Delete list"
+     * 4. Waiting for the list count to decrease
      */
     public void deleteList(int index) {
+        int currentCount = getLists().size();
         List<WebElement> lists = getLists();
         WebElement targetList = lists.get(index);
 
@@ -73,8 +77,9 @@ public class BoardDetailPage extends BasePage {
         targetList.findElement(byCy("list-options")).click();
         waitForVisible(byCy("list-dropdown"));
 
-        // Click delete
+        // Click delete and wait for the list to be removed from the DOM
         waitForClickable(byCy("delete-list")).click();
+        waitForNumberOfElements(byCy("list"), currentCount - 1);
     }
 
     /** Checks if a list with the given name exists on the board. */

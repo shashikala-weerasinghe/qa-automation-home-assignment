@@ -45,4 +45,9 @@ public abstract class BasePage {
     protected boolean waitForInvisible(By locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
+
+    /** Waits until the exact expected number of elements matching the locator are present in the DOM. */
+    protected List<WebElement> waitForNumberOfElements(By locator, int expectedCount) {
+        return wait.until(ExpectedConditions.numberOfElementsToBe(locator, expectedCount));
+    }
 }

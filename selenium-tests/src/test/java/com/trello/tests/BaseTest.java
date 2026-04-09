@@ -1,5 +1,6 @@
 package com.trello.tests;
 
+import com.trello.config.ConfigReader;
 import com.trello.driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -34,7 +35,7 @@ public abstract class BaseTest {
      */
     private void resetDatabase() {
         try {
-            URL url = new URL("http://localhost:3000/api/reset");
+            URL url = new URL(ConfigReader.getBaseUrl() + "/api/reset");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
