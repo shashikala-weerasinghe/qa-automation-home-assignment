@@ -40,14 +40,41 @@ Shashikala Weerasinghe
 
 ⭐ Quick Start
 
-### Start app
+## ⭐ How to Run
+
+### 1️⃣ Start the Application (Root Project)
+
+## Go to root project folder
+
+cd qa-automation-home-assignment
+
+## Install dependencies
 
 npm install
+
+## Start the application
+
 npm start
 
-### Run UI tests
+## Run UI Automation (Selenium + TestNG)
+
+### Navigate to UI automation tests folder
+
+cd selenium-tests
+
+### Run the tests
 
 mvn clean test
+
+## Run API Automation (Jest)
+
+### Navigate to API automation tests folder
+
+cd api-tests
+
+### Install dependencies (if not already done)
+
+npm install
 
 ### Run API tests
 
