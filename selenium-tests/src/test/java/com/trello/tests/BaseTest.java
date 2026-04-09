@@ -2,37 +2,51 @@ package com.trello.tests;
 
 import com.trello.config.ConfigReader;
 import com.trello.driver.DriverManager;
+import com.trello.listeners.TestListener;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Base test class handling WebDriver lifecycle and database reset.
- * Every test method gets a fresh browser and clean database state.
- */
+@Listeners(TestListener.class)
 public abstract class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeMethod
+    @BeforeSuite(alwaysRun = true)
+    public void suiteSetUp() {
+        System.out.println("========== Test Suite Started ==========");
+        System.out.println("Base URL: " + ConfigReader.getBaseUrl());
+        System.out.println("Browser: " + ConfigReader.getBrowser());
+        System.out.println("Headless: " + ConfigReader.isHeadless());
+    }
+
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         resetDatabase();
         driver = DriverManager.getDriver();
     }
 
-    @AfterMethod
-    public void tearDown() {
+    @AfterMethod(alwaysRun = true)
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            System.err.println("FAILED: " + result.getName() + " — " + result.getThrowable().getMessage());
+        }
         DriverManager.quitDriver();
     }
 
-    /**
-     * Resets the backend database to a clean empty state via the /api/reset endpoint.
-     * This ensures test isolation — each test starts with no boards, lists, or cards.
-     */
+    @AfterSuite(alwaysRun = true)
+    public void suiteTearDown() {
+        System.out.println("========== Test Suite Finished ==========");
+    }
+
     private void resetDatabase() {
         try {
             URL url = new URL(ConfigReader.getBaseUrl() + "/api/reset");

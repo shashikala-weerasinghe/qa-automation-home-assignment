@@ -1,10 +1,14 @@
 package com.trello.pages;
 
 import com.trello.config.ConfigReader;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -24,17 +28,34 @@ public class BoardListPage extends BasePage {
     }
 
     /**
-     * Creates a new board by clicking the create area,
-     * typing the name, and pressing Enter.
-     * The app auto-redirects to the board detail page on success.
+     * Creates a new board.
+     * When the board list is empty, the app shows an Emptylist UI with a direct
+     * input [data-cy='first-board']. When boards already exist, the app shows
+     * a BoardCreate button [data-cy='create-board'] that reveals an input on click.
+     * This method handles both cases.
      */
     public void createBoard(String boardName) {
-        waitForClickable(byCy("create-board")).click();
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        boolean isEmpty;
+        try {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(byCy("first-board")));
+            isEmpty = true;
+        } catch (Exception e) {
+            isEmpty = false;
+        }
 
-        WebElement input = waitForVisible(byCy("new-board-input"));
-        input.clear();
-        input.sendKeys(boardName);
-        input.sendKeys(Keys.ENTER);
+        if (isEmpty) {
+            WebElement input = waitForVisible(byCy("first-board"));
+            input.clear();
+            input.sendKeys(boardName);
+            input.sendKeys(Keys.ENTER);
+        } else {
+            waitForClickable(byCy("create-board")).click();
+            WebElement input = waitForVisible(byCy("new-board-input"));
+            input.clear();
+            input.sendKeys(boardName);
+            input.sendKeys(Keys.ENTER);
+        }
     }
 
     /** Returns all visible board item elements. */

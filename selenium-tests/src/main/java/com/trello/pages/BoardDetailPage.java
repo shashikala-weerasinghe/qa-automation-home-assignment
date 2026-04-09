@@ -3,7 +3,10 @@ package com.trello.pages;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -27,13 +30,27 @@ public class BoardDetailPage extends BasePage {
     }
 
     /**
-     * Creates a new list by clicking "Add a list", typing the name,
-     * and pressing Enter. Waits for the expected list count to confirm creation.
+     * Creates a new list by typing the name and pressing Enter.
+     * When the board has no lists, the input is already visible (createListInput=true).
+     * When lists exist, the "Add another list" button must be clicked first.
+     * Waits for the expected list count to confirm creation.
      */
     public void createList(String listName) {
         int currentCount = getLists().size();
 
-        waitForClickable(byCy("create-list")).click();
+        // If the input is not yet visible, click the "create-list" button to open it
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        boolean inputAlreadyVisible;
+        try {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(byCy("add-list-input")));
+            inputAlreadyVisible = true;
+        } catch (Exception e) {
+            inputAlreadyVisible = false;
+        }
+
+        if (!inputAlreadyVisible) {
+            waitForClickable(byCy("create-list")).click();
+        }
 
         WebElement input = waitForVisible(byCy("add-list-input"));
         input.clear();

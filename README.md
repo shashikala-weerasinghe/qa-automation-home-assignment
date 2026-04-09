@@ -23,12 +23,15 @@ Install the app, simply clone this project and
 3. Delete a list.
 ```
 
+![alt text](image.png)
+
 **API Automation**
 
 ```
 1. Add a new list
 2. Delete the newly created list
 ```
+![alt text](image-1.png)
 
 **Evaluation Criteria:**
 

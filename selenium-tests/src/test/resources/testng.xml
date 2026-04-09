@@ -1,6 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Trello Board Test Suite" verbose="1">
+<suite name="Trello Board Test Suite" verbose="2" thread-count="1">
+
+    <listeners>
+        <listener class-name="com.trello.listeners.TestListener"/>
+    </listeners>
+
     <test name="Board and List Tests">
+        <groups>
+            <run>
+                <include name="board"/>
+                <include name="list"/>
+            </run>
+        </groups>
         <classes>
             <class name="com.trello.tests.BoardTest"/>
         </classes>
