@@ -1,11 +1,3 @@
-# 🚀 Transmedia QA Recruitment – Technical Test
-
-This repository contains the solution for the **Transmedia QA Recruitment Technical Assessment**, covering both **UI Automation** and **API Automation**.
-
----
-
-## 📌 Tech Stack
-
 ### UI Automation
 
 - Selenium WebDriver (Java)
@@ -34,8 +26,6 @@ project-root/
 │── screenshots/ # Test result images
 │── pom.xml
 │── README.md
-
----
 
 ## ⚙️ Setup Instructions
 
@@ -129,7 +119,5 @@ mvn clean test
 
 # Run API tests
 npm test
-
----
 
 ```
