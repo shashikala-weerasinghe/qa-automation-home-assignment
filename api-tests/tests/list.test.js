@@ -3,7 +3,6 @@ const { resetDatabase, createBoard, createList, getLists, deleteList } = require
 describe('List API', () => {
   let boardId;
 
-  // Reset DB and create a board before each test for isolation
   beforeEach(async () => {
     await resetDatabase();
     const boardRes = await createBoard('Test Board');
@@ -47,33 +46,27 @@ describe('List API', () => {
 
   describe('DELETE /lists/:id — Delete the newly created list', () => {
     it('should delete the newly created list successfully', async () => {
-      // Step 1: Create a list
       const listName = 'List to Delete';
       const createRes = await createList(boardId, listName);
       expect(createRes.status).toBe(201);
       const listId = createRes.data.id;
 
-      // Step 2: Delete the list
       const deleteRes = await deleteList(listId);
       expect(deleteRes.status).toBe(200);
 
-      // Step 3: Verify the list no longer exists
       const getRes = await getLists();
       const deletedList = getRes.data.find((list) => list.id === listId);
       expect(deletedList).toBeUndefined();
     });
 
     it('should not affect other lists when deleting one', async () => {
-      // Create two lists
       const res1 = await createList(boardId, 'Keep This');
       const res2 = await createList(boardId, 'Delete This');
       const keepId = res1.data.id;
       const deleteId = res2.data.id;
 
-      // Delete only the second list
       await deleteList(deleteId);
 
-      // Verify first list still exists
       const getRes = await getLists();
       const remaining = getRes.data.find((list) => list.id === keepId);
       const deleted = getRes.data.find((list) => list.id === deleteId);
